@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Debug Test</title>
+</head>
+<body>
+    <h1>API Debug Test</h1>
+    
+    <div style="margin: 20px;">
+        <button id="test-btn">Test getCurrentPrompt()</button>
+        <div id="result" style="margin-top: 10px; padding: 10px; border: 1px solid #ccc;"></div>
+    </div>
+
+    <!-- Load the necessary scripts -->
+    <script src="js/levels.js"></script>
+    <script>
+        // Mock DOM elements to test
+        window.elements = {
+            safeModeBtn: { classList: { contains: () => false } },
+            coreElementsSelect: { value: 'cat' },
+            solutionsToolsSelect: { value: 'a ladder' },
+            actionsMethodsSelect: { value: 'use' },
+            promptInput: { value: 'rescue the cat with a ladder' }
+        };
+        
+        // Mock gameState
+        window.gameState = { currentLevel: 1 };
+        
+        // Copy the getCurrentPrompt function logic
+        function getCurrentPrompt() {
+            const isSafeMode = elements.safeModeBtn.classList.contains('active');
+            
+            if (isSafeMode) {
+                const coreElement = elements.coreElementsSelect.value;
+                const solutionTool = elements.solutionsToolsSelect.value;
+                const actionMethod = elements.actionsMethodsSelect.value;
+                
+                let prompt = '';
+                
+                if (actionMethod && solutionTool) {
+                    prompt = `${actionMethod} ${solutionTool}`;
+                    if (coreElement) {
+                        prompt += ` to help the ${coreElement}`;
+                    }
+                } else if (solutionTool) {
+                    prompt = solutionTool;
+                    if (coreElement) {
+                        prompt += ` for the ${coreElement}`;
+                    }
+                } else if (coreElement) {
+                    prompt = coreElement;
+                }
+                
+                return prompt;
+            } else {
+                return elements.promptInput.value.trim();
+            }
+        }
+        
+        document.getElementById('test-btn').onclick = function() {
+            const result = getCurrentPrompt();
+            document.getElementById('result').innerHTML = `
+                <strong>Result:</strong> "${result}"<br>
+                <strong>Mode:</strong> ${elements.safeModeBtn.classList.contains('active') ? 'Safe Mode' : 'Free Text'}<br>
+                <strong>Elements:</strong><br>
+                - Core: ${elements.coreElementsSelect.value}<br>
+                - Solution: ${elements.solutionsToolsSelect.value}<br>
+                - Action: ${elements.actionsMethodsSelect.value}<br>
+                - Free Text: ${elements.promptInput.value}
+            `;
+        };
+    </script>
+</body>
+</html>

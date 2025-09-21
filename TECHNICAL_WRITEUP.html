@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>TECHNICAL_WRITEUP</title>
+  <style>
+    /* Default styles provided by pandoc.
+    ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+    */
+    html {
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 12px;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      html {
+        background-color: white;
+      }
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    svg {
+      height: auto;
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
+      font-size: 85%;
+      margin: 0;
+      hyphens: manual;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      border: none;
+      border-top: 1px solid #1a1a1a;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+</head>
+<body>
+<h1 id="prompt-master-parameter-lab-technical-writeup-pdf-ready">Prompt
+Master: Parameter Lab — Technical Writeup (PDF-Ready)</h1>
+<ul>
+<li><strong>Version</strong>: Submission v1.0</li>
+<li><strong>Team</strong>: [Your Team Name], UNSW CSE / Day of AI
+AU</li>
+<li><strong>Contact</strong>: [Your Email]</li>
+<li><strong>Repo</strong>: [GitHub URL]</li>
+<li><strong>Live Demo</strong>: [URL]</li>
+<li><strong>Video (&lt;= 3 min)</strong>: [YouTube URL]</li>
+</ul>
+<h2 id="abstract">Abstract</h2>
+<ul>
+<li><strong>Cortex: AI Parameter Lab</strong> is a browser-based,
+GenAI-powered learning game for Years 7–10 that teaches AI literacy by
+letting students shape images with safe, scaffolded prompts and
+parameters.</li>
+<li>Players advance from vocabulary precision to parameter mastery while
+the built-in “Why?” panel explains outcomes in plain English.</li>
+<li>The game is fun and classroom-ready: Safe Mode eliminates free text
+by default for safety, levels encode key AI concepts, and costs are
+controlled via fixed base images and selective API calls.</li>
+</ul>
+<h2 id="learning-goals">Learning Goals</h2>
+<ul>
+<li><strong>Vocabulary Precision</strong>: Show how different words
+trigger different model priors (Level 2).</li>
+<li><strong>Model Limits &amp; Hallucination</strong>: Spotlight
+impossible requests, then reflect (Level 3).</li>
+<li><strong>Parameter Control</strong>: Creativity slider (temperature)
+and style weight to direct outputs (Levels 6–10).</li>
+<li><strong>Explainability &amp; Critical Thinking</strong>: The “Why?”
+system translates parameter effects into student-friendly guidance.</li>
+<li><strong>Cross-Disciplinary Hooks</strong>: History of computing (Ada
+Lovelace), space history (Apollo 11), math (Fibonacci), and design
+(Bauhaus).</li>
+</ul>
+<h2 id="system-overview">System Overview</h2>
+<ul>
+<li>Pure client-side web app: HTML/CSS/Vanilla JS with modular
+files.</li>
+<li>GenAI integration via Google Gemini 2.5 Flash Image API for
+generation and image-edit.</li>
+<li>Classroom safe by default: Safe Mode prompt builder (no free text).
+Free text is reserved for teacher/demo runs and can be hidden in
+competition deployments.</li>
+</ul>
+<h2 id="architecture">Architecture</h2>
+<ul>
+<li><strong>Core modules</strong>:
+<ul>
+<li><code>js/app.js</code>: Game state, UI flow, Safe Mode builder,
+generation/validation, “Why?” invocation.</li>
+<li><code>js/levels.js</code>: Level definitions, Safe Mode vocab,
+requirements, hints; includes upgraded L9–L10.</li>
+<li><code>js/api.js</code>: Gemini integration (generateImageEdit, demo
+fallback), base image fetch + MIME handling.</li>
+<li><code>js/explanation.js</code>: Explanation engine: ProphetMode
+(keyword reasons) + ParameterAnalyst (parameter insights).</li>
+<li><code>js/audio.js</code>: SFX; <code>style.css</code>: Gumroad-like
+playful design; <code>assets/</code>: fixed images, icons.</li>
+</ul></li>
+<li><strong>Navigation &amp; UX</strong>:
+<ul>
+<li>History API for shareable URLs and back button support
+(<code>window.hash #level=n</code>).</li>
+<li>Fixed base image for Level 1 to preserve context and reduce API
+usage.</li>
+</ul></li>
+<li><strong>File references</strong>:
+<ul>
+<li>Image-edit API: <code>js/api.js:95</code>,
+<code>js/api.js:140-168</code></li>
+<li>SVG→PNG safety conversion: <code>js/app.js:818-838</code>,
+<code>js/app.js:861-868</code></li>
+<li>Level 1 edit flow: <code>js/app.js:810-840</code></li>
+<li>Safe Mode population/use: <code>js/app.js:420-560</code>,
+<code>js/levels.js</code> per-level <code>safeModeOptions</code></li>
+</ul></li>
+</ul>
+<h2 id="genai-integration">GenAI Integration</h2>
+<ul>
+<li><strong>Image Edit (Level 1)</strong>: Use base image + instruction.
+If base is SVG, convert to PNG and set correct MIME to avoid API errors.
+<ul>
+<li>MIME-safe loader returns <code>{ base64, mimeType }</code>, and
+falls back to canvas PNG if needed.</li>
+</ul></li>
+<li><strong>Prompt Engineering</strong>:
+<ul>
+<li>Safe Mode composes: <code>coreElements</code> +
+<code>actionsMethods</code> + <code>solutionsTools</code>.</li>
+<li>Free Text (teacher/demo only) composes directly; style guidance
+applied via <code>getStyledPrompt</code>.</li>
+</ul></li>
+<li><strong>Parameters</strong>:
+<ul>
+<li>Creativity slider → <code>temperature</code> in <code>[0, 2]</code>
+(<code>creativity / 50.0</code>) in <code>js/app.js</code> generation
+path.</li>
+<li>Style weight slider modifies textual style scaffolding (from subtle
+to dominant).</li>
+</ul></li>
+</ul>
+<h2 id="safety-compliance">Safety &amp; Compliance</h2>
+<ul>
+<li><strong>No Free Text by Default</strong>: Safe Mode is the default
+student flow. For competition/classroom builds, hide the free-input
+toggle and start in Safe Mode.
+<ul>
+<li><strong>Deployment note</strong>: Ensure the UI ships with Safe Mode
+active and the free-input button hidden/removed. This avoids
+unrestricted text I/O.</li>
+</ul></li>
+<li><strong>Curated Vocabulary</strong>: Age-appropriate, level-aligned
+Safe Mode sets for Levels 2–10, including deliberate “bad” options to
+teach prompt quality.
+<ul>
+<li>Example L2 “good”: “an oversized umbrella,” “a shade sail canopy.”
+“Bad”: “a portable flamethrower.”</li>
+<li>See <code>js/levels.js:74-96</code> (L2) and analogous blocks for
+other levels.</li>
+</ul></li>
+<li><strong>Content Boundaries</strong>:
+<ul>
+<li>Fixed base images and strongly constrained prompt templates reduce
+risk of unsafe outputs.</li>
+<li>If using online APIs, add server-side proxy and keyword filtering
+(future work) for institutional deployments.</li>
+</ul></li>
+</ul>
+<h2 id="explainability-why-panel">Explainability (“Why?” Panel)</h2>
+<ul>
+<li><strong>Modes</strong>:
+<ul>
+<li><strong>ProphetMode</strong>: Simple causal explanations from
+recognized keywords.</li>
+<li><strong>ParameterAnalyst</strong>: Actionable coaching for sliders
+and style blending; shows synergy profiles (safe/balanced/high-contrast
+combos).</li>
+</ul></li>
+<li><strong>English Guidance with Targeted Tips</strong>:
+<ul>
+<li>Example: “Treat this as a studio session with Bauhaus. Push
+creativity past 70% and try contrasting metaphors for time.”</li>
+<li>Implementation: <code>js/explanation.js:286-305</code></li>
+</ul></li>
+<li><strong>Critical Thinking Prompts</strong>:
+<ul>
+<li>Bias, hallucination, and “AI doesn’t truly understand” are embedded
+as rotating educational callouts.</li>
+</ul></li>
+</ul>
+<h2 id="levels-curriculum-highlights">Levels &amp; Curriculum
+Highlights</h2>
+<ul>
+<li><strong>Level 2: “Shade the people” — Vocabulary Precision</strong>
+<ul>
+<li>Good: “oversized umbrella,” “shade sail canopy,” “mature shade
+tree.”</li>
+<li>Bad: “portable flamethrower,” “giant heat lamp.”</li>
+<li>Safe Mode: <code>js/levels.js:74-96</code></li>
+<li><em>[Screenshot: L2 Safe Mode dropdowns showing good vs bad
+options]</em></li>
+</ul></li>
+<li><strong>Level 3: “Three-legged cat” — Hallucination
+Awareness</strong>
+<ul>
+<li>Good: “custom prosthetic,” “mobility harness,” “rehabilitation
+team.”</li>
+<li>Bad: “rocket boosters,” “chaotic dog chase scene.”</li>
+<li>Safe Mode: <code>js/levels.js:115-135</code></li>
+<li><em>[Screenshot: L3 output and “Why?” explaining limits]</em></li>
+</ul></li>
+<li><strong>Level 6–8: Parameter Control &amp; Style Weight</strong>
+<ul>
+<li>Creativity thresholds and style blending; vintage café styling via
+props/lighting/materials.</li>
+<li>Safe Mode: <code>js/levels.js:299-336</code></li>
+<li><em>[Screenshot: Sliders at 30% vs 70% and visual
+difference]</em></li>
+</ul></li>
+<li><strong>Level 9: Ada Lovelace x Cyberpunk London — Historical
+Remix</strong>
+<ul>
+<li>Good: “Ada Lovelace,” “Analytical Engine,” “neon light trails,”
+“steampunk gears.”</li>
+<li>Off-theme: “medieval dragon,” “muddy construction cranes.”</li>
+<li>Safe Mode: <code>js/levels.js:357-384</code></li>
+<li><em>[Screenshot: L9 final + “Why?” coaching]</em></li>
+</ul></li>
+<li><strong>Level 10: Apollo 11 x Bauhaus Data Mural — Data + Math +
+Design</strong>
+<ul>
+<li>Good: “glowing Fibonacci spirals,” “binary code grid,” “Bauhaus
+geometric shapes.”</li>
+<li>Off-theme: “rainy city traffic jam,” “random graffiti tags.”</li>
+<li>Safe Mode: <code>js/levels.js:394-422</code></li>
+<li><em>[Screenshot: L10 composition emphasizing geometric
+motifs]</em></li>
+</ul></li>
+</ul>
+<h2 id="ux-accessibility">UX &amp; Accessibility</h2>
+<ul>
+<li>Instant feedback loops with hints and Safe Mode chips to reduce
+typing.</li>
+<li>History API for shareable states and sane back button behavior.</li>
+<li>Visual focus: high-contrast badges, large tap targets, minimal
+reading load.</li>
+<li><strong>Accessibility recommendations</strong>:
+<ul>
+<li>Keyboard navigation for chips and sliders.</li>
+<li>Alt text for generated images and base images.</li>
+<li>Color contrast audit for yellow/teal combinations (WCAG AA).</li>
+</ul></li>
+</ul>
+<h2 id="key-technical-details">Key Technical Details</h2>
+<ul>
+<li><strong>SVG-to-PNG Conversion for Edits</strong>:
+<ul>
+<li><strong>Problem</strong>: Image-edit API rejects mislabeled SVG
+bytes.</li>
+<li><strong>Fix</strong>: Detect SVG, render to canvas, export PNG, pass
+<code>image/png</code> to API.</li>
+<li><strong>Code</strong>: <code>js/app.js:818-838</code>,
+<code>js/app.js:861-868</code>, <code>js/api.js:152-168</code></li>
+</ul></li>
+<li><strong>Instruction Augmentation (Level 1 Rescue Intent)</strong>:
+<ul>
+<li>If user’s edit plausibly helps the cat reach ground, the instruction
+encourages repositioning the cat on ground and making success
+visible.</li>
+<li><strong>Code</strong>: <code>js/app.js:822-832</code></li>
+</ul></li>
+<li><strong>Cost Control</strong>:
+<ul>
+<li>Fixed base images where possible; generate on click only.</li>
+<li>1024×1024 outputs; no auto-regeneration loops.</li>
+</ul></li>
+</ul>
+<h2 id="deployment-configuration">Deployment &amp; Configuration</h2>
+<ul>
+<li><strong>Local</strong>:
+<ul>
+<li>Open <code>index.html</code> or use a lightweight server (to avoid
+CORS).</li>
+<li>Add API key in <code>js/api.js</code> if using live generation.</li>
+</ul></li>
+<li><strong>Demo Mode</strong>:
+<ul>
+<li>Without API key, the app uses educational SVG fallbacks with full
+explanation flow intact.</li>
+</ul></li>
+<li><strong>Competition/Classroom Profile</strong>:
+<ul>
+<li>Ensure Safe Mode is the only visible input pathway (hide Free Text
+button/toggle).</li>
+<li>Preload fixed base assets; test L2–L10 Safe Mode vocab for
+clarity.</li>
+</ul></li>
+</ul>
+<h2 id="testing-validation">Testing &amp; Validation</h2>
+<ul>
+<li><strong>Functional</strong>:
+<ul>
+<li>L1 edit path, SVG→PNG, MIME correctness.</li>
+<li>Parameter gates for levels with thresholds (creativity/style)
+checked in <code>checkWinCondition</code>:
+<code>js/app.js:1030-1100</code></li>
+</ul></li>
+<li><strong>UX</strong>:
+<ul>
+<li>History navigation works across levels; no broken states.</li>
+<li>“Why?” panel displays level-specific English insights
+(<code>js/explanation.js:291-302</code>).</li>
+</ul></li>
+<li><strong>Teacher Acceptance</strong>:
+<ul>
+<li>One-session pilot: students can pass Levels 1–5 with Safe Mode
+only.</li>
+<li>Comparisons of good vs bad prompt blocks produce learnable
+differences.</li>
+</ul></li>
+</ul>
+<h2 id="limitations">Limitations</h2>
+<ul>
+<li>Browser-only inference means latency depends on the external
+API.</li>
+<li>No server-side content moderation included in this repo—recommended
+for district deployments.</li>
+<li>“Agentic” auto-demo possible via scripting, but live manual demo
+yields tighter narrative control and avoids variance in generative
+outputs.</li>
+</ul>
+<h2 id="future-work">Future Work</h2>
+<ul>
+<li><strong>Classroom lock</strong>: code-level flag to fully remove
+free text UI in builds (competition profile).</li>
+<li><strong>Server proxy with moderation</strong> (blocked-term lists,
+category filters).</li>
+<li><strong>Telemetry for teachers</strong> (time-on-task, slider usage
+heatmaps).</li>
+<li><strong>Additional levels</strong>: data bias, adversarial prompts,
+human-in-the-loop review.</li>
+</ul>
+<hr />
+<h2 id="appendix-a-code-map">Appendix A — Code Map</h2>
+<ul>
+<li><strong>Frontend</strong>:
+<ul>
+<li><code>index.html</code>: Shell and containers.</li>
+<li><code>style.css</code>: UI components and accessibility tweaks.</li>
+<li><code>js/app.js</code>: State, UI handlers, generation, results,
+success flow, history API.</li>
+<li><code>js/levels.js</code>: Level configs, Safe Mode sets,
+thresholds, hints.</li>
+<li><code>js/explanation.js</code>: ProphetMode + ParameterAnalyst
+(explainability).</li>
+<li><code>js/api.js</code>: Live API integration and demo SVG
+generator.</li>
+<li><code>assets/</code>: Base images (e.g.,
+<code>assets/images/level1_base.svg</code>) and docs.</li>
+</ul></li>
+</ul>
+<hr />
+<h2 id="appendix-b-build-run">Appendix B — Build &amp; Run</h2>
+<ul>
+<li><strong>Dev</strong>:
+<ul>
+<li>Run with VS Code Live Server or any static server.</li>
+<li>In <code>js/api.js</code>, set <code>API_KEY</code> and
+<code>API_URL</code> if using live API.</li>
+</ul></li>
+<li><strong>Competition Demo</strong>:
+<ul>
+<li>Start in Safe Mode; hide free-input UI.</li>
+<li>Record with OBS; use macOS zoom (Control + scroll) to focus on
+sliders and “Why?” panel.</li>
+</ul></li>
+</ul>
+<hr />
+<h2 id="appendix-c-figures-insert-later">Appendix C — Figures (Insert
+Later)</h2>
+<ul>
+<li><em>[Figure 1: Home screen + Level Select]</em></li>
+<li><em>[Figure 2: Level 2 Safe Mode with “good vs bad” shade
+prompts]</em></li>
+<li><em>[Figure 3: Level 3 output + “Why?” hallucination note]</em></li>
+<li><em>[Figure 4: Sliders at 30% vs 70% (side-by-side)]</em></li>
+<li><em>[Figure 5: Level 9 Ada Lovelace cyber mural result]</em></li>
+<li><em>[Figure 6: Level 10 Apollo Bauhaus data mural result]</em></li>
+<li><em>[Figure 7: “Why?” panel with actionable tips]</em></li>
+</ul>
+<hr />
+<h2 id="appendix-d-submission-links-fill-in">Appendix D — Submission
+Links (Fill In)</h2>
+<ul>
+<li><strong>Public video</strong>: [YouTube URL]</li>
+<li><strong>GitHub repository</strong>: [URL]</li>
+<li><strong>Live demo</strong>: [URL]</li>
+<li><strong>PDF (this document)</strong>: [Drive/Link]</li>
+</ul>
+</body>
+</html>
